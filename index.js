@@ -67,15 +67,35 @@ document.getElementById('calculate').addEventListener('click', function () {
       break;
     
         case 'mode':
-            function calculateMode(list) {
-                const frequencyMap = {};
-                
-                list.forEach(value => {
-                  frequencyMap[value] = (frequencyMap[value] || 0) + 1;
-                });
+            function findMode(arr) {
+                if (arr.length === 0) {
+                  return null; // Return null for an empty array
+                }
               
-                const maxFrequency = Math.max(...Object.values(frequencyMap));
-                const mode = Object.keys(frequencyMap).filter(key => frequencyMap[key] === maxFrequency).map(Number);
+                // Create an empty object to store the frequency of each element
+                const frequencyCounter = {};
+              
+                // Populate the frequency counter
+                for (const num of arr) {
+                  frequencyCounter[num] = (frequencyCounter[num] || 0) + 1;
+                }
+              
+                let maxFrequency = 0;
+                let mode = [];
+              
+                // Find the mode(s)
+                for (const num in frequencyCounter) {
+                  if (frequencyCounter[num] > maxFrequency) {
+                    maxFrequency = frequencyCounter[num];
+                    mode = [parseInt(num)];
+                  } else if (frequencyCounter[num] === maxFrequency) {
+                    mode.push(parseInt(num));
+                  }
+                }
+              
+                if (mode.length === arr.length) {
+                  return null; // Return null if all elements have the same frequency (no mode)
+                }
               
                 return mode;
               }
