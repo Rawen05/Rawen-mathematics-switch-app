@@ -67,38 +67,25 @@ document.getElementById('calculate').addEventListener('click', function () {
       break;
     
         case 'mode':
-            function findMode(arr) {
-                if (arr.length === 0) {
-                  return null; // Return null for an empty array
-                }
-              
-                // Create an empty object to store the frequency of each element
-                const frequencyCounter = {};
-              
-                // Populate the frequency counter
-                for (const num of arr) {
-                  frequencyCounter[num] = (frequencyCounter[num] || 0) + 1;
-                }
-              
-                let maxFrequency = 0;
-                let mode = [];
-              
-                // Find the mode(s)
-                for (const num in frequencyCounter) {
-                  if (frequencyCounter[num] > maxFrequency) {
-                    maxFrequency = frequencyCounter[num];
-                    mode = [parseInt(num)];
-                  } else if (frequencyCounter[num] === maxFrequency) {
-                    mode.push(parseInt(num));
-                  }
-                }
-              
-                if (mode.length === arr.length) {
-                  return null; // Return null if all elements have the same frequency (no mode)
-                }
-              
-                return mode;
-              }
+            function mostFrequent(arr, n) {
+ 
+    let maxcount = 0;
+    let element_having_max_freq;
+    for (let i = 0; i < n; i++) {
+        let count = 0;
+        for (let j = 0; j < n; j++) {
+            if (arr[i] == arr[j])
+                count++;
+        }
+ 
+        if (count > maxcount) {
+            maxcount = count;
+            element_having_max_freq = arr[i];
+        }
+    }
+ 
+    return element_having_max_freq;
+}
            
         case 'range':
             var min = list[0];
